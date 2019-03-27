@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hr>
+
+{% if user.is_authenticated %}
+  <div>
+    <a class="btn btn-success btn-sm mt-1 mb-1" href="{% url 'blog:post_new' %}" style='text_align':center; >New Post</a>
+  </div>
+{% endif %}
+
+<hr>
+
+  {% for post in posts %}
+    <div class="card w-80 mb-3">
+      <div class="card-header"><p class="card-text"><span style="color:blue;"><strong><a href="{% url 'blog:user_posts' post.author.username %}">{{post.author|upper}}</a></strong></span> | {{post.date_posted|date:"F d Y"}}</p></div>
+      <div class="card-body">
+        <h2 class="card-title"><span><img class="rounded-circle article-img" src="{{ post.author.profile.profile_pic.url }}"></span>{{post.title}}</h2>
+        <p class="card-text">{{post.content|truncatechars:300}}</p>
+        <a href="{% url 'blog:post_detail' pk=post.pk%}" class="btn btn-secondary btn-sm mt-1 mb-1">Read more</a>
+      </div>
+    </div>
+  {% endfor %}
+  {% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+  {% endif %}
+{% endblock %}
+
+
+
+{% block links %}
+<div class="col-md-4 ">
+  <hr>
+  <h3 style='background-color : #999;'>Our Side-Bar</h3>
+  <p>You can put any information here that you like , you can also add anything thats necessary</p>
+  <div class="list-group">
+    <a href="#" class="list-group-item">Latest Posts</a>
+    <a href="#" class="list-group-item">Announcements</a>
+    <a href="#" class="list-group-item">Calenders</a>
+    <a href="#" class="list-group-item">etc</a>
+  </div>
+  <h3>OTHER BLOG POSTS</h3>
+  {% for post in posts %}
+        <li><a href="{% url 'blog:post_detail' pk=post.pk%}" class="btn btn-primary btn-sm mt-1 mb-1">{{post.title}}</a></li>
+        <hr>
+  {% endfor %}
+</div>
+
+
+
+{% endblock links%}

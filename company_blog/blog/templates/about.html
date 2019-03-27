@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%load staticfiles%}
+
+{% block content %}
+
+  <div class="hello">
+      <h1>About page</h1>
+  </div>
+
+{% endblock %}
+
+{% block links %}
+<div class="col-md-4 ">
+  <hr>
+  <h3 style='background-color : #999;'>Our Side-Bar</h3>
+  <p>You can put any information here that you like , yu can also add anything thats necessary</p>
+  <div class="list-group">
+    <a href="#" class="list-group-item">Latest Posts</a>
+    <a href="#" class="list-group-item">Announcements</a>
+    <a href="#" class="list-group-item">Calenders</a>
+    <a href="#" class="list-group-item">etc</a>
+  </div>
+</div>
+{% endblock links%}
