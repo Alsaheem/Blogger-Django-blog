@@ -19,8 +19,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'adebisi2844'
-EMAIL_HOST_USER = 'adebisiayomide07@gmail.com'
+EMAIL_HOST_PASSWORD = 'emailpasword'
+EMAIL_HOST_USER = 'your email'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
